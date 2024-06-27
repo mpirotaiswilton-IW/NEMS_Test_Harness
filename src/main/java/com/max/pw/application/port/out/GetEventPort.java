@@ -4,6 +4,6 @@ import com.max.pw.application.domain.model.EventPayload;
 
 public interface GetEventPort {
     
-    EventPayload getEventPayload();
+    EventPayload getEventPayload(EventPayload eventPayload);
     
 }
