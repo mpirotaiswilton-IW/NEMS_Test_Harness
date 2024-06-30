@@ -27,10 +27,10 @@ class SendPersonController {
     ResponseEntity<String> sendPerson(@Valid @RequestBody EventPayload eventPayload){
         sendEventUseCase.SendEventPayload(eventPayload);
         return new ResponseEntity<String>("new Message:" 
-                + Arrays.toString(eventPayload.getPayloadStrings() )
-                + "| to send to topic: " 
+                + Arrays.toString(eventPayload.getPayloadStrings())
+                + " | to send to topic: " 
                 +  eventPayload.getTopic()
-                + "| with interval: " 
+                + " | with interval: " 
                 + eventPayload.getInterval()
                 , HttpStatus.OK);
     }
