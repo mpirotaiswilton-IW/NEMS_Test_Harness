@@ -3,13 +3,14 @@
 
 ## Summary
 
-[Publisher-Hex-Arch](#publisher-hex-arch)
+* [Publisher-Hex-Arch](#publisher-hex-arch)
 * [Summary](#summary)
 * [Setup and Pre-requisites](#setup-and-pre-requisites)
 * [Running the Microservice](#running-the-microservice)
 * [Verifying our solution](#verifying-our-solution)
     * [Using the API with Postman](#using-the-api-with-postman)
     * [Viewing our sent event](#viewing-our-sent-event)
+* [Stopping the container](stopping-the-container)
 
 ## Setup and Pre-requisites
 
@@ -83,4 +84,11 @@ Using Postman:
 This functionality is currently unavailable. At this time, once a message is sent, the application only logs the following message to the container console:
 ```
 Publisher yet to be implemented. Echoing message payload(s): [payload1, Payload2]
+```
+
+## Stopping the container
+
+To stop the docker container, run the following command: 
+```
+docker-compose down
 ```
