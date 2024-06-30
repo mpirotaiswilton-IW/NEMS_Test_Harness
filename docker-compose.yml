@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+  publisher:
+    container_name: publisher
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports: 
+      - "8080:8080"
