@@ -1,4 +1,4 @@
-package com.max.pw.infrastructure;
+package com.iw.infrastructure;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Component
-public @interface WebAdapter {
+public @interface EdaPublisherAdapter {
 
   /**
    * The value may indicate a suggestion for a logical component name,

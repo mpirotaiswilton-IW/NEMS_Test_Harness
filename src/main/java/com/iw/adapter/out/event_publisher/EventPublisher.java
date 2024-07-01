@@ -1,11 +1,11 @@
-package com.max.pw.adapter.out.event_publisher;
+package com.iw.adapter.out.event_publisher;
 
 import java.util.Arrays;
 
 import org.springframework.stereotype.Component;
 
-import com.max.pw.application.domain.model.EventPayload;
-import com.max.pw.application.port.out.GetEventPort;
+import com.iw.application.domain.model.EventPayload;
+import com.iw.application.port.out.GetEventPort;
 
 @Component
 public class EventPublisher implements GetEventPort {

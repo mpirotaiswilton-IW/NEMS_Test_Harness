@@ -1,6 +1,6 @@
-package com.max.pw.application.port.out;
+package com.iw.application.port.out;
 
-import com.max.pw.application.domain.model.EventPayload;
+import com.iw.application.domain.model.EventPayload;
 
 public interface GetEventPort {
     

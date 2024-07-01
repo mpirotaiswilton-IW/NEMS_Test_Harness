@@ -1,9 +1,9 @@
-package com.max.pw.application.domain.service;
+package com.iw.application.domain.service;
 
-import com.max.pw.application.domain.model.EventPayload;
-import com.max.pw.application.port.in.SendEventUseCase;
-import com.max.pw.application.port.out.GetEventPort;
-import com.max.pw.infrastructure.UseCase;
+import com.iw.application.domain.model.EventPayload;
+import com.iw.application.port.in.SendEventUseCase;
+import com.iw.application.port.out.GetEventPort;
+import com.iw.infrastructure.UseCase;
 
 import lombok.RequiredArgsConstructor;
 

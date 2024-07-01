@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   publisher:
-    container_name: publisher
+    container_name: test_harness
     build:
       context: .
       dockerfile: Dockerfile

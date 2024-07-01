@@ -8,11 +8,11 @@
 		<version>3.2.7</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.max.pw.iw</groupId>
-	<artifactId>publisher_hex_arch</artifactId>
+	<groupId>com.iw</groupId>
+	<artifactId>nems_test_harness</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>publisher_hex_arch</name>
-	<description>Demo project for Spring Boot</description>
+	<name>nems_test_harness</name>
+	<description></description>
 	<url/>
 	<licenses>
 		<license/>

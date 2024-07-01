@@ -1,4 +1,4 @@
-package com.max.pw.application.domain.model;
+package com.iw.application.domain.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
