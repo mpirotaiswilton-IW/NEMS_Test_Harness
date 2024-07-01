@@ -1,9 +1,9 @@
-# Publisher-Hex-Arch
+# NEMS_Test_Harness
  A service built with Hexagonal Architecture, combining a REST API and Event-Driven Architecture to send event objects to a Solace event broker.
 
 ## Summary
 
-* [Publisher-Hex-Arch](#publisher-hex-arch)
+* [NEMS_Test_Harness](#nems-test-harness)
 * [Summary](#summary)
 * [Setup and Pre-requisites](#setup-and-pre-requisites)
 * [Running the Microservice](#running-the-microservice)
