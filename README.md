@@ -45,7 +45,7 @@
     ```
 
 4. A single docker container should now be running:
-    * `publisher`: where a spring-boot api image, built using a Dockerfile, is containerized. This container is responsible for sending events contaning personal information to the event broker with an exposed API.
+    * `test_harness`: where a spring-boot api image, built using a Dockerfile, is containerized. This container is responsible for sending events contaning personal information to the event broker with an exposed API.
 
 5. The event publisher is now ready for use
 
