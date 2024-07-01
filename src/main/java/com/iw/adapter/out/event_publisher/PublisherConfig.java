@@ -1,5 +1,7 @@
 package com.iw.adapter.out.event_publisher;
 
+import java.util.Properties;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -7,11 +9,14 @@ import org.springframework.context.annotation.Configuration;
 
 import com.iw.adapter.out.event_publisher.util.EventUtil;
 import com.solace.messaging.MessagingService;
+import com.solace.messaging.PubSubPlusClientException;
+import com.solace.messaging.config.SolaceProperties.MessageProperties;
+import com.solace.messaging.publisher.OutboundMessage;
+import com.solace.messaging.publisher.OutboundMessageBuilder;
 import com.solace.messaging.publisher.PersistentMessagePublisher;
 
 import jakarta.annotation.PreDestroy;
-
-import java.util.Properties;
+import com.iw.adapter.out.event_publisher.GlobalProperties;
 
 @Configuration
 public class PublisherConfig {
@@ -27,28 +32,45 @@ public class PublisherConfig {
     final static String SCOPE = GlobalProperties.getProperty("solace.auth.scope");
     final static String ISSUER = GlobalProperties.getProperty("solace.auth.issuer");
 
-    // final MessagingService messagingService = EventUtil.ConnectBasic();
+    final MessagingService messagingService = EventUtil.ConnectBasic();
 
     PersistentMessagePublisher publisher;
 
-    // @Bean
-    // public PersistentMessagePublisher persistentMessagePublisher() {
+    @Bean
+    public PersistentMessagePublisher persistentMessagePublisher() {
 
-    //     // build the publisher object
-    //     publisher = messagingService.createPersistentMessagePublisherBuilder()
-    //             .onBackPressureWait(1)
-    //             .build();
-    //     publisher.start();
+        // build the publisher object
+        publisher = messagingService.createPersistentMessagePublisherBuilder()
+                .onBackPressureWait(1)
+                .build();
+        publisher.start();
 
-    //     return publisher;
-    // }
+        // publisher receipt callback, can be called for ACL violations, spool over quota, nobody subscribed to a topic, etc.
+        publisher.setMessagePublishReceiptListener(publishReceipt -> {
+            final PubSubPlusClientException e = publishReceipt.getException();
+            if (e == null) {  // no exception, ACK, broker has confirmed receipt
+                OutboundMessage outboundMessage = publishReceipt.getMessage();
+                logger.debug(String.format("ACK for Message %s", outboundMessage));  // good enough, the broker has it now
+            } else {// not good, a NACK
+                Object userContext = publishReceipt.getUserContext();  // optionally set at publish()
+                if (userContext != null) {
+                    logger.warn(String.format("NACK for Message %s - %s", userContext, e));
+                } else {
+                    OutboundMessage outboundMessage = publishReceipt.getMessage();  // which message got NACKed?
+                    logger.warn(String.format("NACK for Message %s - %s", outboundMessage, e));
+                }
+            }
+        });
 
-    // @PreDestroy
-    // public void onDestroy(){
-    //     System.out.println("Callback Triggered - @PreDestroy");
-    //     System.out.println("Disconnecting publisher...");
-    //     publisher.terminate(1500);
-    //     messagingService.disconnect();
-    // }
+        return publisher;
+    }
+
+    @PreDestroy
+    public void onDestroy(){
+        System.out.println("Callback Triggered - @PreDestroy");
+        System.out.println("Disconnecting publisher...");
+        publisher.terminate(1500);
+        messagingService.disconnect();
+    }
 
 }

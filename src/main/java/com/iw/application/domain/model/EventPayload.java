@@ -21,6 +21,7 @@ public class EventPayload {
     @NotEmpty(message = "payload must have at least one element")
     private String[] payloadStrings;
 
+    // Interval between messages in seconds
     @Positive(message = "interval must be defined as positive decimal number greater than zero")
     private double interval;
 
