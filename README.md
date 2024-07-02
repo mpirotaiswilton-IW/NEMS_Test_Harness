@@ -33,8 +33,7 @@
     cd NEMS_Test_Publisher
     ```
 
-
-    run the following command:  
+    then, run the following command:  
 
     ```
     <# Linux/MacOs #>
@@ -45,7 +44,7 @@
     ```
 
 
-3. Once the build is successful, run this command to deploy it as a docker container:
+3. Once the build is successful, change back to the cloned repository's directory, then run this command to deploy it as a docker container:
 
     ```
     docker-compose up -d --build
