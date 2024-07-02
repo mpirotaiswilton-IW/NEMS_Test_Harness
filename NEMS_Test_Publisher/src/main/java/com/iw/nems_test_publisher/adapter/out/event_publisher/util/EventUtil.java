@@ -1,4 +1,4 @@
-package com.iw.adapter.out.event_publisher.util;
+package com.iw.nems_test_publisher.adapter.out.event_publisher.util;
 
 import java.util.Properties;
 
@@ -10,7 +10,7 @@ import com.solace.messaging.config.AuthenticationStrategy.OAuth2;
 import com.solace.messaging.config.SolaceProperties;
 import com.solace.messaging.config.profile.ConfigurationProfile;
 
-import com.iw.adapter.out.event_publisher.GlobalProperties;
+import com.iw.nems_test_publisher.adapter.out.event_publisher.GlobalProperties;
 
 public class EventUtil {
 

@@ -1,4 +1,4 @@
-package com.iw.infrastructure;
+package com.iw.nems_test_publisher.infrastructure;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Component
-public @interface UseCase {
+public @interface EdaPublisherAdapter {
 
   /**
    * The value may indicate a suggestion for a logical component name,

@@ -1,4 +1,4 @@
-package com.iw.application.domain.model;
+package com.iw.nems_test_publisher.application.domain.model;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;

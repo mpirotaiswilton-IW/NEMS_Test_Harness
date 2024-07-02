@@ -1,4 +1,4 @@
-package com.iw.adapter.in.web;
+package com.iw.nems_test_publisher.adapter.in.web;
 
 import lombok.RequiredArgsConstructor;
 
@@ -8,8 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.iw.application.domain.model.EventPayload;
-import com.iw.application.port.in.SendEventUseCase;
+import com.iw.nems_test_publisher.application.domain.model.EventPayload;
+import com.iw.nems_test_publisher.application.port.in.SendEventUseCase;
 
 import jakarta.validation.Valid;
 

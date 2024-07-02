@@ -1,11 +1,11 @@
-package com.iw.adapter.out.event_publisher;
+package com.iw.nems_test_publisher.adapter.out.event_publisher;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.iw.adapter.out.event_publisher.util.EventUtil;
+import com.iw.nems_test_publisher.adapter.out.event_publisher.util.EventUtil;
 import com.solace.messaging.MessagingService;
 import com.solace.messaging.PubSubPlusClientException;
 import com.solace.messaging.publisher.OutboundMessage;

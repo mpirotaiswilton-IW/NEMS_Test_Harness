@@ -1,11 +1,11 @@
-package com.iw.adapter.out.event_publisher;
+package com.iw.nems_test_publisher.adapter.out.event_publisher;
 
 import org.springframework.stereotype.Component;
 
-import com.iw.adapter.out.event_publisher.util.EventUtil;
-import com.iw.application.domain.model.EventPayload;
-import com.iw.application.domain.model.TimeStampedMessage;
-import com.iw.application.port.out.GetEventPort;
+import com.iw.nems_test_publisher.adapter.out.event_publisher.util.EventUtil;
+import com.iw.nems_test_publisher.application.domain.model.EventPayload;
+import com.iw.nems_test_publisher.application.domain.model.TimeStampedMessage;
+import com.iw.nems_test_publisher.application.port.out.GetEventPort;
 import com.solace.messaging.MessagingService;
 import com.solace.messaging.publisher.OutboundMessage;
 import com.solace.messaging.publisher.OutboundMessageBuilder;

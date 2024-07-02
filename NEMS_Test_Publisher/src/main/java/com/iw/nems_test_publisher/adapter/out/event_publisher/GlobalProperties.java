@@ -1,4 +1,4 @@
-package com.iw.adapter.out.event_publisher;
+package com.iw.nems_test_publisher.adapter.out.event_publisher;
 
 import java.io.IOException;
 import java.io.InputStream;

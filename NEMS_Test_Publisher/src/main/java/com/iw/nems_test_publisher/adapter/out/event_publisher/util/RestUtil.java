@@ -1,4 +1,4 @@
-package com.iw.adapter.out.event_publisher.util;
+package com.iw.nems_test_publisher.adapter.out.event_publisher.util;
 
 import org.apache.http.client.HttpClient;
 

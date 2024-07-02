@@ -1,4 +1,4 @@
-package com.iw;
+package com.iw.nems_test_publisher;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
