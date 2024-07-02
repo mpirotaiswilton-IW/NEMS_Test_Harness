@@ -27,7 +27,14 @@
 1. Using a Command Line Interface of your choosing, change directory to the downloaded/cloned repository
 
 
-2. To build the publisher application, run the following command:  
+2. To build the publisher application, change directory to `/NEMS_Test_Publisher`:
+
+    ```
+    cd NEMS_Test_Publisher
+    ```
+
+
+    run the following command:  
 
     ```
     <# Linux/MacOs #>
@@ -45,7 +52,7 @@
     ```
 
 4. A single docker container should now be running:
-    * `test_harness`: where a spring-boot api image, built using a Dockerfile, is containerized. This container is responsible for sending events contaning personal information to the event broker with an exposed API.
+    * `nems_test_publish`: where a spring-boot api image, built using a Dockerfile, is containerized. This container is responsible for sending events contaning personal information to the event broker with an exposed API.
 
 5. The event publisher is now ready for use
 
