@@ -28,17 +28,19 @@ public class EventPublisher implements GetEventPort {
 
     @Override
     public EventPayload getEventPayload(EventPayload eventPayload) {
-        // System.out.println("Publisher yet to be implemented. Echoing message payload(s): " + Arrays.toString(eventPayload.getPayloadStrings()));
-        SendPayloadAsMessage(eventPayload);
+        System.out.println("Publisher received new event payload! starting new Thread...");
+        try{
+            new Thread(() -> {
+                SendPayloadAsMessage(eventPayload);
+                System.out.println("All messages published, closing thread...");
+            }).start();
+        } catch(RuntimeException e){
+            logger.warn("### Caught while trying to create or start new Thread",e);
+        } 
         return eventPayload;
     }
 
     private void SendPayloadAsMessage(EventPayload payload) {
-
-        // TODO: 
-        // 1. Check that topic exists in event Broker
-        // 2. Pass message as an object with string message and Date timestamp 
-
         OutboundMessageBuilder messageBuilder = messagingService.messageBuilder();
         for(int i = 0; i < payload.getPayloadStrings().length; i++) {
             String payloadString = payload.getPayloadStrings()[i];
