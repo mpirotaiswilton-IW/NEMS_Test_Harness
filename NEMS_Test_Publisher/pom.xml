@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.iw</groupId>
-	<artifactId>nems_test_harness</artifactId>
+	<artifactId>nems_test_publisher</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>nems_test_harness</name>
+	<name>nems_test_publisher</name>
 	<description></description>
 	<url/>
 	<licenses>

@@ -4,7 +4,7 @@ services:
   publisher:
     container_name: test_harness
     build:
-      context: .
+      context: ./NEMS_Test_Publisher/
       dockerfile: Dockerfile
     ports: 
       - "8080:8080"
