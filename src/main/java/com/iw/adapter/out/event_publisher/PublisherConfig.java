@@ -1,7 +1,5 @@
 package com.iw.adapter.out.event_publisher;
 
-import java.util.Properties;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -10,13 +8,10 @@ import org.springframework.context.annotation.Configuration;
 import com.iw.adapter.out.event_publisher.util.EventUtil;
 import com.solace.messaging.MessagingService;
 import com.solace.messaging.PubSubPlusClientException;
-import com.solace.messaging.config.SolaceProperties.MessageProperties;
 import com.solace.messaging.publisher.OutboundMessage;
-import com.solace.messaging.publisher.OutboundMessageBuilder;
 import com.solace.messaging.publisher.PersistentMessagePublisher;
 
 import jakarta.annotation.PreDestroy;
-import com.iw.adapter.out.event_publisher.GlobalProperties;
 
 @Configuration
 public class PublisherConfig {
