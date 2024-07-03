@@ -34,6 +34,7 @@ class SendPersonController {
                 + "with interval: " + LS
                 + eventPayload.getInterval() + LS
                 + "they are being sent on an asynchronous thread and will be accessible shortly."
+
                 , HttpStatus.OK);
     }
 
