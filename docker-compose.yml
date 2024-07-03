@@ -2,12 +2,12 @@ version: '3.9'
 
 services:
   publisher:
-    container_name: test_harness
+    container_name: test_publisher
     build:
       context: ./NEMS_Test_Publisher/
       dockerfile: Dockerfile
     ports: 
-      - "8080:8080"
+      - "8082:8080"
     depends_on:
       solace-init:
         condition: service_completed_successfully
