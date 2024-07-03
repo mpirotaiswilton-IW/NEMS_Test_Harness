@@ -47,7 +47,7 @@ public class EventPublisher implements GetEventPort {
             TimeStampedMessage timeStampedMessage = new TimeStampedMessage(payloadString);
             OutboundMessage message = messageBuilder.build(timeStampedMessage.toString());
             try {
-                System.out.println("sending message to topic [" + payload.getTopic() + "]: " + payloadString);
+                System.out.println("sending message #" + (i+1) + "/" + payload.getPayloadStrings().length);
                 publisher.publish(message, Topic.of(payload.getTopic()));
             } catch (RuntimeException e) {
                 logger.warn("### Caught while trying to publisher.publish()",e);
