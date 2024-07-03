@@ -22,16 +22,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 class SendPersonController {
 
     private final SendEventUseCase sendEventUseCase;
+    private final String LS = System.lineSeparator();
 
     @PostMapping("/")
     ResponseEntity<String> sendPerson(@Valid @RequestBody EventPayload eventPayload){
         sendEventUseCase.SendEventPayload(eventPayload);
-        return new ResponseEntity<String>("new Message:" 
-                + Arrays.toString(eventPayload.getPayloadStrings())
-                + " | to send to topic: " 
-                +  eventPayload.getTopic()
-                + " | with interval: " 
-                + eventPayload.getInterval()
+        return new ResponseEntity<String>("new Message(s) received:" 
+                + Arrays.toString(eventPayload.getPayloadStrings()) + LS
+                + "to send to topic: " + LS
+                +  eventPayload.getTopic() + LS
+                + "with interval: " + LS
+                + eventPayload.getInterval() + LS
+                + "they are being sent on an asynchronous thread and will be accessible shortly."
+
                 , HttpStatus.OK);
     }
 

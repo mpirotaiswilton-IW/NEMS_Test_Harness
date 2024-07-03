@@ -37,10 +37,10 @@
 
     ```
     <# Linux/MacOs #>
-    ./mvnw clean package
+    ./mvnw clean package -DskipTests
 
     <# Windows #>
-    .\mvnw clean package
+    .\mvnw clean package -DskipTests
     ```
 
 
@@ -50,8 +50,9 @@
     docker-compose up -d --build
     ```
 
-4. A single docker container should now be running:
-    * `nems_test_publish`: where a spring-boot api image, built using a Dockerfile, is containerized. This container is responsible for sending events contaning personal information to the event broker with an exposed API.
+4. 3 docker containers should now be running:
+    * `publisher`: where a spring-boot api image, built using a Dockerfile, is containerized. This container is responsible for sending events contaning personal information to the event broker with an exposed API.
+
 
 5. The event publisher is now ready for use
 
@@ -85,12 +86,20 @@ Using Postman:
     new Message:[payload1, Payload2] | to send to topic: test/topic | with interval: 10.0
     ``` 
 
-### Viewing our sent event
+### Viewing our sent event in Solace event broker
 
-This functionality is currently unavailable. At this time, once a message is sent, the application only logs the following message to the container console:
-```
-Publisher yet to be implemented. Echoing message payload(s): [payload1, Payload2]
-```
+Once the publisher received the event successfully, the events will be processed sequentially based on the interval specified in the request. To view these messages in the event queue, go to <localhost:8081>: you will be greeted with a login page for the solace broker.
+
+1. Use the credentials 
+    ```
+    username:admin
+    password:admin
+    ```
+
+2. Select the default Message VPN
+3. Select Queues, then `TestQueue`
+4. Select the Messages Queued tab, you should see the same amount of messages that you sent using Postman
+
 
 ## Stopping the container
 
