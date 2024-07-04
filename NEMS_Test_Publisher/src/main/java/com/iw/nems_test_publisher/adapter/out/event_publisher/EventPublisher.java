@@ -2,6 +2,8 @@ package com.iw.nems_test_publisher.adapter.out.event_publisher;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iw.nems_test_publisher.adapter.out.event_publisher.util.EventUtil;
 import com.iw.nems_test_publisher.application.domain.model.EventPayload;
 import com.iw.nems_test_publisher.application.domain.model.TimeStampedMessage;
@@ -43,14 +45,28 @@ public class EventPublisher implements GetEventPort {
     private void SendPayloadAsMessage(EventPayload payload) {
         OutboundMessageBuilder messageBuilder = messagingService.messageBuilder();
         for(int i = 0; i < payload.getPayloadStrings().length; i++) {
+
+            // Take payload string, convert to timestamped message
             String payloadString = payload.getPayloadStrings()[i];
             TimeStampedMessage timeStampedMessage = new TimeStampedMessage(payloadString);
-            OutboundMessage message = messageBuilder.build(timeStampedMessage.toString());
+
             try {
+                // Map Object to json string
+                ObjectMapper mapper = new ObjectMapper();
+                String result = mapper.writeValueAsString(timeStampedMessage);
+
+                // Create OutboundMessage using mapped JSON string
+                OutboundMessage message = messageBuilder.build(result);
+
+                //Logs message number out of total messages to be sent on thread
                 System.out.println("sending message #" + (i+1) + "/" + payload.getPayloadStrings().length);
+
+                //publish message
                 publisher.publish(message, Topic.of(payload.getTopic()));
             } catch (RuntimeException e) {
                 logger.warn("### Caught while trying to publisher.publish()",e);
+            } catch (JsonProcessingException e){
+
             } finally {
                 if(i + 1 < payload.getPayloadStrings().length) {
                     try {
