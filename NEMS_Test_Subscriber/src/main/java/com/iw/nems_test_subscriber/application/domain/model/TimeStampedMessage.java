@@ -1,8 +1,9 @@
 package com.iw.nems_test_subscriber.application.domain.model;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,17 +11,19 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TimeStampedMessage implements Serializable {
-    String messageString;
-    Date timeStamp = new Date();
+
+    private String messageString;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss:SSS")
+    private Date timeStamp;
 
     public TimeStampedMessage(String message) {
         this.messageString = message;
+        this.timeStamp = new Date();
     }
 
-    @Override
-    public String toString() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-        String output = "TimeStampedMessage{ \"messageString\": \"%s\", \"timeStamp\": \"%s\"}";
-        return String.format(output, messageString, formatter.format(timeStamp));
+    public TimeStampedMessage() {
+        this.messageString = "";
+        this.timeStamp = new Date();
     }
 }
