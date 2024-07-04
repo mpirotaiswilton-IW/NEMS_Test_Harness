@@ -65,7 +65,7 @@ To verify our solution, we need to send a request to the API exposed by the `pub
 
 Using Postman:
 
-1. Select `Import` on the `My Workspace` left-hand side window, then import the [Publisher-Hex-Arch.postman_collection.json](https://github.com/mpirotaiswilton-IW/publisher-hex-arch/blob/master/Publisher-Hex-Arch.postman_collection.json)
+1. Select `Import` on the `My Workspace` left-hand side window, then import the [Publisher-Hex-Arch.postman_collection.json](https://github.com/mpirotaiswilton-IW/NEMS_Test_Harness/blob/master/NEMS_Test_Publisher/Publisher-Hex-Arch.postman_collection.json)
 
 2. Select the `Send Person` Post request. In the `Body` tab, there is a json object with 3 fields that looks like this:
     ```json
