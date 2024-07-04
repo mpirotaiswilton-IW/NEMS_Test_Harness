@@ -21,7 +21,7 @@ public class ReceiverConfig {
     @Autowired
     private EventListener eventListener;
 
-    private static volatile boolean hasDetectedRedelivery = false; // detected any messages being redelivered?
+    // private static volatile boolean hasDetectedRedelivery = false; // detected any messages being redelivered?
 
     // final static Properties SOLACE_PROPERTIES = GlobalProperties.setSolaceProperties("BASIC");
 
@@ -64,13 +64,13 @@ public class ReceiverConfig {
         }
         // asynchronous anonymous receiver message callback
         receiver.receiveAsync(message -> {
-            if (message.isRedelivered()) { // useful check
-                // this is the broker telling the consumer that this message has been sent and
-                // not ACKed before. This can happen if an exception is thrown, or the broker
-                // restarts, or the network disconnects perhaps an error in processing? Should
-                // do extra checks to avoid duplicate processing
-                hasDetectedRedelivery = true;
-            }
+            // if (message.isRedelivered()) { // useful check
+            //     // this is the broker telling the consumer that this message has been sent and
+            //     // not ACKed before. This can happen if an exception is thrown, or the broker
+            //     // restarts, or the network disconnects perhaps an error in processing? Should
+            //     // do extra checks to avoid duplicate processing
+            //     hasDetectedRedelivery = true;
+            // }
 
             // Where customer code can be implemeted to handle events before they are ACKed
             eventListener.processEvent(message);
