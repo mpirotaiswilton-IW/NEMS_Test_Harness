@@ -11,7 +11,8 @@ public class PlaceholderPort implements GetMessagePort {
     @Override
     public TimeStampedMessage getEventPayload(TimeStampedMessage timeStampedMessage) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getEventPayload'");
+        System.out.println("Method not implemented. A new message was received but nothing will be done with it.");
+        return timeStampedMessage;
     }
 
 }
