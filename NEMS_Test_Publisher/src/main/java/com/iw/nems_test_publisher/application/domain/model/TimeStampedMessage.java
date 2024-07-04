@@ -12,18 +12,18 @@ import lombok.Setter;
 @Setter
 public class TimeStampedMessage implements Serializable {
 
-    private String messageString;
+    private String content;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss:SSS")
     private Date timeStamp;
 
     public TimeStampedMessage(String message) {
-        this.messageString = message;
+        this.content = message;
         this.timeStamp = new Date();
     }
 
     public TimeStampedMessage() {
-        this.messageString = "";
+        this.content = "";
         this.timeStamp = new Date();
     }
 }
