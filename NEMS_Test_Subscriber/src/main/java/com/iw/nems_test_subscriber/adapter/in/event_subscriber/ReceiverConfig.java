@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 import com.iw.nems_test_subscriber.adapter.in.event_subscriber.util.EventUtil;
 import com.solace.messaging.MessagingService;
@@ -19,13 +20,16 @@ public class ReceiverConfig {
     private ApplicationContext appContext;
 
     @Autowired
+    private Environment env;
+
+    @Autowired
     private EventListener eventListener;
 
     // private static volatile boolean hasDetectedRedelivery = false; // detected any messages being redelivered?
 
     // final static Properties SOLACE_PROPERTIES = GlobalProperties.setSolaceProperties("BASIC");
 
-    final static String QUEUE_NAME = GlobalProperties.getProperty("nems.broker.queue");
+    // final static String QUEUE_NAME = GlobalProperties.getProperty("nems.broker.queue");
     final static String TOKEN_SERVER = GlobalProperties.getProperty("solace.auth.tokenserver");
     final static String CLIENT_ID = GlobalProperties.getProperty("solace.auth.clientid");
     final static String CLIENT_SECRET = GlobalProperties.getProperty("solace.auth.clientsecret");
@@ -41,9 +45,13 @@ public class ReceiverConfig {
 
         final MessagingService messagingService = EventUtil.ConnectBasic();
 
+        final String QUEUE_NAME = env.getProperty("nems.broker.queue");
+
         receiver = messagingService
                 .createPersistentMessageReceiverBuilder()
                 .build(Queue.durableExclusiveQueue(QUEUE_NAME));
+
+                
 
         try {
             receiver.start();

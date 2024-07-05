@@ -33,7 +33,7 @@ password = "admin"
 basic = HTTPBasicAuth(username, password)
 
 queues = [
-    # Queue(name = "PeopleQ",
+    # Queue(name = "TestQueue",
     #       access_type = "exclusive", 
     #       maxMsgSpoolUsage = 5000,
     #       permission = "consume", 
@@ -41,9 +41,9 @@ queues = [
     #       egress_enabled = True,
     #       subscribed_topics=
     #       [
-    #           Subscription("people/add")
+    #           Subscription("test/topic")
     #       ]),
-    Queue(name = "TestQueue",
+    Queue(name = "Death",
           access_type = "exclusive", 
           maxMsgSpoolUsage = 5000,
           permission = "consume", 
@@ -51,7 +51,27 @@ queues = [
           egress_enabled = True,
           subscribed_topics=
           [
-              Subscription("test/topic")
+              Subscription("root/nems/death")
+          ]),
+    Queue(name = "Birth",
+          access_type = "exclusive", 
+          maxMsgSpoolUsage = 5000,
+          permission = "consume", 
+          ingress_enabled = True, 
+          egress_enabled = True,
+          subscribed_topics=
+          [
+              Subscription("root/nems/birth")
+          ]),
+    Queue(name = "Enrollment",
+          access_type = "exclusive", 
+          maxMsgSpoolUsage = 5000,
+          permission = "consume", 
+          ingress_enabled = True, 
+          egress_enabled = True,
+          subscribed_topics=
+          [
+              Subscription("root/nems/enrollment")
           ])
 ]
 
