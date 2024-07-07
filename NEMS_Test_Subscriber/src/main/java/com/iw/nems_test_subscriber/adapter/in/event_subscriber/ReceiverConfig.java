@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 
 import com.iw.nems_test_subscriber.adapter.in.event_subscriber.util.EventUtil;
 import com.solace.messaging.MessagingService;
@@ -37,6 +36,13 @@ public class ReceiverConfig {
 
     @Bean
     public PersistentMessageReceiver persistentMessageReceiver() {
+
+        final String QUEUE_NAME = GlobalProperties.getEnvProperty("nems.broker.queue");
+        // final String TOKEN_SERVER = GlobalProperties.getEnvProperty("solace.auth.tokenserver");
+        // final String CLIENT_ID = GlobalProperties.getEnvProperty("solace.auth.clientid");
+        // final String CLIENT_SECRET = GlobalProperties.getEnvProperty("solace.auth.clientsecret");
+        // final String SCOPE = GlobalProperties.getEnvProperty("solace.auth.scope");
+        // final String ISSUER = GlobalProperties.getEnvProperty("solace.auth.issuer");
 
         final MessagingService messagingService = EventUtil.ConnectBasic();
 
