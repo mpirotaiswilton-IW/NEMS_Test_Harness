@@ -11,8 +11,6 @@ import com.solace.messaging.config.SolaceProperties;
 
 public class GlobalProperties {
 
-    @Autowired
-    private static Environment env;
     private static Properties properties = new Properties();
     public static String propertyFile = "application.properties";
 
@@ -29,10 +27,6 @@ public class GlobalProperties {
 
     public static String getProperty(String key) {
         return properties.getProperty(key);
-    }
-
-    public static String getEnvProperty(String key) {
-        return env.getProperty(key);
     }
 
     public static Properties loadProperties() throws IOException {
