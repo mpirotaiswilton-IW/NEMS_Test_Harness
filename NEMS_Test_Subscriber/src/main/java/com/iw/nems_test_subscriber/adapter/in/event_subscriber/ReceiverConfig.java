@@ -20,21 +20,16 @@ public class ReceiverConfig {
     private ApplicationContext appContext;
 
     @Autowired
-    private Environment env;
-
-    @Autowired
     private EventListener eventListener;
-
-    // private static volatile boolean hasDetectedRedelivery = false; // detected any messages being redelivered?
 
     // final static Properties SOLACE_PROPERTIES = GlobalProperties.setSolaceProperties("BASIC");
 
-    // final static String QUEUE_NAME = GlobalProperties.getProperty("nems.broker.queue");
-    final static String TOKEN_SERVER = GlobalProperties.getProperty("solace.auth.tokenserver");
-    final static String CLIENT_ID = GlobalProperties.getProperty("solace.auth.clientid");
-    final static String CLIENT_SECRET = GlobalProperties.getProperty("solace.auth.clientsecret");
-    final static String SCOPE = GlobalProperties.getProperty("solace.auth.scope");
-    final static String ISSUER = GlobalProperties.getProperty("solace.auth.issuer");
+    final static String QUEUE_NAME = GlobalProperties.getEnvProperty("nems.broker.queue");
+    final static String TOKEN_SERVER = GlobalProperties.getEnvProperty("solace.auth.tokenserver");
+    final static String CLIENT_ID = GlobalProperties.getEnvProperty("solace.auth.clientid");
+    final static String CLIENT_SECRET = GlobalProperties.getEnvProperty("solace.auth.clientsecret");
+    final static String SCOPE = GlobalProperties.getEnvProperty("solace.auth.scope");
+    final static String ISSUER = GlobalProperties.getEnvProperty("solace.auth.issuer");
 
     final MessagingService messagingService = EventUtil.ConnectBasic();
 
@@ -45,13 +40,9 @@ public class ReceiverConfig {
 
         final MessagingService messagingService = EventUtil.ConnectBasic();
 
-        final String QUEUE_NAME = env.getProperty("nems.broker.queue");
-
         receiver = messagingService
                 .createPersistentMessageReceiverBuilder()
                 .build(Queue.durableExclusiveQueue(QUEUE_NAME));
-
-                
 
         try {
             receiver.start();
@@ -72,13 +63,6 @@ public class ReceiverConfig {
         }
         // asynchronous anonymous receiver message callback
         receiver.receiveAsync(message -> {
-            // if (message.isRedelivered()) { // useful check
-            //     // this is the broker telling the consumer that this message has been sent and
-            //     // not ACKed before. This can happen if an exception is thrown, or the broker
-            //     // restarts, or the network disconnects perhaps an error in processing? Should
-            //     // do extra checks to avoid duplicate processing
-            //     hasDetectedRedelivery = true;
-            // }
 
             // Where customer code can be implemeted to handle events before they are ACKed
             eventListener.processEvent(message);
