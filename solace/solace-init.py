@@ -1,9 +1,9 @@
 import requests
 import time
+import json
+import os 
 
 from requests.auth import HTTPBasicAuth
-
-
 
 class Subscription:
     def __init__(self, topic):
@@ -22,6 +22,9 @@ class Queue:
 
 r = requests.Response()
 r.status_code = 400
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+json_file_path = dir_path + os.sep + "queues.json"
 
 host_name = "solace"
 port = "8080"
@@ -43,37 +46,66 @@ queues = [
     #       [
     #           Subscription("test/topic")
     #       ]),
-    Queue(name = "Death",
-          access_type = "exclusive", 
-          maxMsgSpoolUsage = 5000,
-          permission = "consume", 
-          ingress_enabled = True, 
-          egress_enabled = True,
-          subscribed_topics=
-          [
-              Subscription("root/nems/death")
-          ]),
-    Queue(name = "Birth",
-          access_type = "exclusive", 
-          maxMsgSpoolUsage = 5000,
-          permission = "consume", 
-          ingress_enabled = True, 
-          egress_enabled = True,
-          subscribed_topics=
-          [
-              Subscription("root/nems/birth")
-          ]),
-    Queue(name = "Enrollment",
-          access_type = "exclusive", 
-          maxMsgSpoolUsage = 5000,
-          permission = "consume", 
-          ingress_enabled = True, 
-          egress_enabled = True,
-          subscribed_topics=
-          [
-              Subscription("root/nems/enrollment")
-          ])
+    # Queue(name = "Death",
+    #       access_type = "exclusive", 
+    #       maxMsgSpoolUsage = 5000,
+    #       permission = "consume", 
+    #       ingress_enabled = True, 
+    #       egress_enabled = True,
+    #       subscribed_topics=
+    #       [
+    #           Subscription("root/nems/death")
+    #       ]),
+    # Queue(name = "Birth",
+    #       access_type = "exclusive", 
+    #       maxMsgSpoolUsage = 5000,
+    #       permission = "consume", 
+    #       ingress_enabled = True, 
+    #       egress_enabled = True,
+    #       subscribed_topics=
+    #       [
+    #           Subscription("root/nems/birth")
+    #       ]),
+    # Queue(name = "Enrollment",
+    #       access_type = "exclusive", 
+    #       maxMsgSpoolUsage = 5000,
+    #       permission = "consume", 
+    #       ingress_enabled = True, 
+    #       egress_enabled = True,
+    #       subscribed_topics=
+    #       [
+    #           Subscription("root/nems/enrollment")
+    #       ])
 ]
+
+print(dir_path)
+try:
+    with open(json_file_path, mode="r", encoding="utf-8") as read_file:
+        print("file open successful")
+        json_data = json.load(read_file)
+        print("json data assign successful")
+    
+    for queue in json_data["queues"]:
+            print(queue["name"])
+            subscriptions = []
+            for sub in queue["subscribed_topics"]:
+                subscriptions.append(Subscription(sub["name"]))
+            queues.append(
+                Queue(
+                    name=queue["name"],
+                    access_type=queue["access_type"],
+                    maxMsgSpoolUsage=queue["maxMsgSpoolUsage"],
+                    permission=queue["permission"],
+                    ingress_enabled=queue["ingress_enabled"],
+                    egress_enabled=queue["egress_enabled"],
+                    subscribed_topics= subscriptions
+                )
+            )
+
+except:
+    print("error encountered parsing json file")
+
+
 
 while r.status_code != 200 :
     

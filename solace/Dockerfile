@@ -1,8 +1,8 @@
 FROM python:3-alpine
 
 COPY solace-init.py /tmp/solace-init.py
+COPY queues.json /tmp/queues.json
 
-# WORKDIR /tmp
 
 USER root
 RUN python -m pip install --upgrade pip
